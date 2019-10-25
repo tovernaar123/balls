@@ -1,13 +1,13 @@
 class partical {
   float r = random(5,25);
-  PVector speed = new PVector(random(-20,20) ,random(-20,20) );
+  PVector speed = new PVector(random(-10,10),random(-10,10) );
   PVector pos   = new PVector(random(r+speed.x,width-r-speed.x),random(r+speed.y,height-r-speed.y)); 
   PVector acc   = new PVector(0,0);
-  int health = 10;
+  int health = 50;
   String f;
-  float mass = r * 1.5;
-
-  
+  float mass = r*r * PI*1;
+  color c = #0000ff; 
+  int frames_alive;
  void force(PVector force) {
    PVector f = PVector.div(force,mass);
    acc.add(f);
@@ -22,7 +22,7 @@ class partical {
   }
   
   void display() {
- 
+  frames_alive++;
   
   if ( pos.y+r+speed.y > height || pos.y-r+speed.y < 0 ) {
      if(pos.y+r+speed.y > height) {
@@ -47,12 +47,12 @@ class partical {
   }
   
   ellipseMode(RADIUS);
-  fill(#0000ff );
+  fill(c );
   ellipse(pos.x,pos.y,r,r);
   if(health_on) {
   fill(0 );
   f = str(health);
-  textSize(25);
+  textSize(r);
   text(health,pos.x-textWidth(f)/2,pos.y);  
   fill(255); 
   }
@@ -98,15 +98,29 @@ float m2 = p.mass;
 PVector u1 = speed.rotate(angle);
 PVector u2 = p.speed.rotate(angle);
 
-PVector speednew1 = new PVector(u1.x * (m1-m2) / (m1+m2)+u2.x*2 *m2 /(m1+m2), u1.y);
-PVector speednew2 = new PVector(u2.x * (m1-m2) / (m1+m2)+u1.x*2 *m2 /(m1+m2), u2.y);
+PVector speednew1 = new PVector((u1.x * (m1 - m2) + 2 * u2.x * m2) / (m1+m2), u1.y);
+PVector speednew2 = new PVector((u2.x * (m2 - m1) + u1.x * 2 * m1) / (m1+m2), u2.y);
 
 speednew1.rotate(-angle);
 speednew2.rotate(-angle);
-
 speed = speednew1;
 p.speed = speednew2;
-
+if(coolision_friction_on == true ) {
+   PVector friction = p.speed.copy();
+   friction.normalize();
+   float amount = -0.1;
+   float speed = p.speed.mag();
+   friction.mult(amount*speed*speed);
+   p.force(friction); 
+   }
+if(coolision_friction_on == true ) {
+   PVector friction = speed.copy();
+   friction.normalize();
+   float amount = -0.1;
+   float speed = this.speed.mag();
+   friction.mult(amount*speed*speed);
+   force(friction); 
+   }
 }
 
 }
@@ -119,9 +133,9 @@ p.speed = speednew2;
 
 
 float angle(PVector a, PVector b) {
-return -atan2(a.y-b.y, a.x-b.x);
+return -atan2(a.y -b.y , a.x - b.x );
 }
-   
+
   
   
 
