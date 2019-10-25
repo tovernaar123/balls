@@ -1,4 +1,4 @@
-void mousePressed() {
+void mouseDragged() {
 
 particals.add(new partical());
 partical part = particals.get(particals.size()-1);
