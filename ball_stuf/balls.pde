@@ -46,9 +46,15 @@ class partical {
       speed.x *= -1;
   }
   
-  ellipseMode(RADIUS);
-  fill(c );
-  ellipse(pos.x,pos.y,r,r);
+ 
+  if(ball_is_image){
+  imageMode(CENTER);
+  image(ball,pos.x,pos.y,r*2,r*2);
+  }else {
+   ellipseMode(RADIUS);
+   fill(c);
+   ellipse(pos.x,pos.y,r,r); 
+  }
   if(health_on) {
   fill(0 );
   f = str(health);

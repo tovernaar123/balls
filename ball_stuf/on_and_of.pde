@@ -21,13 +21,37 @@ if(key == 'F' ||key == 'f') {
  friction_on = true;  
    
  }
+}
+ 
+ 
+if(key == 'B' ||key == 'b') {
+ if(ball_is_image == true) {
+  ball_is_image = false; 
+   
+ }else {
+ ball_is_image = true;  
+   
+ }  
+  
+  
+} 
+ if(key == 'C' ||key == 'c') {
+ if(colorchange_on == true) {
+   colorchange_on = false; 
+   for(int i =0; i < particals.size(); i++) {
+    partical part = particals.get(i);
+    part.c =#0000ff;
+   }
+ }else {
+   colorchange_on = true;  
+   
+ }  
   
   
 } 
   
   
-  
-}
-  
+
+}  
   
 }

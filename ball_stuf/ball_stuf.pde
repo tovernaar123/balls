@@ -2,15 +2,17 @@ ArrayList <partical> particals = new ArrayList<partical>();
 int frames =0;
 int deaths;
 int imunity = 25;
- PVector speed_total = new PVector(0,0);
+public PImage ball;
+PVector speed_total = new PVector(0,0);
 public boolean health_on = false;
-public boolean friction_on = false;
+public boolean friction_on = true;
 public boolean gravity_on = false;
 public boolean colorchange_on = true;
 public boolean coolision_friction_on = false;
+public boolean ball_is_image = true;
 void setup() {
   fullScreen();
-
+  ball = loadImage("Ball.png");
   for(int i =0; i < 1; i++) {
     particals.add(new partical());
     }
