@@ -41,6 +41,7 @@ if(key == 'B' ||key == 'b') {
    for(int i =0; i < particals.size(); i++) {
     partical part = particals.get(i);
     part.c =#0000ff;
+     part.ci =0;
    }
  }else {
    colorchange_on = true;  
@@ -49,9 +50,20 @@ if(key == 'B' ||key == 'b') {
   
   
 } 
+
+if(key == 'W' ||key == 'w') {
+  particals.removeAll(particals);  
+   }
+   
+   
+ }
+   
+ 
   
+  
+} 
   
 
-}  
+
+
   
-}
