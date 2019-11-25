@@ -1,14 +1,17 @@
 class partical {
   float r = random(width*0.02,width*0.02+10);
-  PVector speed = new PVector(random((-r/2), (r/2)/0.5),(random((-r/2), (r/2)/0.5) ));
+  //PVector speed = new PVector(random((-r/2), (r/2)/0.5),(random((-r/2), (r/2)/0.5) ));
+  PVector speed = new PVector(random(-4,4),random(-4,4));
+  //PVector speed = new PVector(2,2);
   PVector pos   = new PVector(random(r+speed.x, width-r-speed.x), random(r+speed.y, height-r-speed.y)); 
   PVector acc   = new PVector(0, 0);
   int health = 1;
   String f;
   int ci = 0;
-  float mass = r * r * PI * 1;
+  float mass = r/1000;
   color c = #0000ff; 
   int frames_alive;
+  boolean hit = false;
   void force(PVector force) {
     PVector f = PVector.div(force, mass);
     acc.add(f);
@@ -81,7 +84,7 @@ class partical {
     }
   }
     
-
+ 
 
   void ifhit(int other) {
 
@@ -110,7 +113,7 @@ class partical {
       if (coolision_friction_on == true ) {
         PVector friction = p.speed.copy();
         friction.normalize();
-        float amount = -0.1;
+        float amount = -0.001;
         float speed = p.speed.mag();
         friction.mult(amount*speed*speed);
         p.force(friction);
@@ -118,7 +121,7 @@ class partical {
       if (coolision_friction_on == true ) {
         PVector friction = speed.copy();
         friction.normalize();
-        float amount = -0.1;
+        float amount = -0.001;
         float speed = this.speed.mag();
         friction.mult(amount*speed*speed);
         force(friction);
